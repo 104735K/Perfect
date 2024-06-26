@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>users</title>
+</head>
+<body>
+<div>
+    <h2>회원목록</h2>
+</div>
+<div>
+    <table>
+        <tr>
+            <td>ID</td>
+            <td>이름</td>
+            <td>영문명</td>
+            <td>생년월일</td>
+            <td>성별</td>
+            <td>전화번호</td>
+            <td>주소</td>
+        </tr>
+        <tr th:each="user : ${userList}">
+            <td th:text="${user.userId}"></td>
+            <td th:text="${user.name}"></td>
+            <td th:text="${user.englishName}"></td>
+            <td th:text="${#dates.format(user.birthDate, 'yyyy-MM-dd')}"></td>
+            <td th:text="${user.gender}"></td>
+            <td th:text="${user.phoneNumber}"></td>
+            <td th:text="${user.address}"></td>
+        </tr>
+    </table>
+</div>
+<button type="button" onclick="addUserReq()">회원추가</button>
+<button type="button" onclick="updateUserReq()">회원수정</button>
+
+</body>
+</html>
+<script>
+    const addUserReq =()=> {
+        location.href = "/bowling/add";
+    }
+
+    const updateUserReq =()=> {
+        location.href = "/bowling/update";
+    }
+</script>

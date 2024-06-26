@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>addUser</title>
+</head>
+<body>
+<div>
+    <h2>회원추기</h2>
+</div>
+<div>
+    <form action="/bowling/addUser" method="post" enctype="application/x-www-form-urlencoded">
+        <b>회원이름</b>
+        <input type="text" name="name" required>
+        <b>영문명</b>
+        <input type="text" name="englishName">
+        <b>생년월일</b>
+        <input type="date" name="birthDate">
+        <b>성별</b>
+        <input type="radio" id="male" name="gender" value="남" required>남
+        <input type="radio" id="female" name="gender" value="여" required>여
+        <b>전화번호</b>
+        <input type="text" name="phoneNumber">
+        <b>주소</b>
+        <input type="text" name="address">
+        <button type="button" onclick="cancelReq()">취소</button>
+        <input type="submit" value="저장">
+    </form>
+</div>
+</body>
+</html>
+<script>
+    const cancelReq = () => {
+       location.href = "/bowling/users";
+   }
+</script>
