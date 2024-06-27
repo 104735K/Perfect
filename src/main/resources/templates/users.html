@@ -15,6 +15,7 @@
             <td>이름</td>
             <td>영문명</td>
             <td>생년월일</td>
+            <td>음/양</td>
             <td>성별</td>
             <td>전화번호</td>
             <td>주소</td>
@@ -24,6 +25,7 @@
             <td th:text="${user.name}"></td>
             <td th:text="${user.englishName}"></td>
             <td th:text="${#dates.format(user.birthDate, 'yyyy-MM-dd')}"></td>
+            <td th:text="${user.lunarSolar}"></td>
             <td th:text="${user.gender}"></td>
             <td th:text="${user.phoneNumber}"></td>
             <td th:text="${user.address}"></td>

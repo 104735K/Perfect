@@ -16,18 +16,23 @@
                 <td>이름</td>
                 <td>영문명</td>
                 <td>생년월일</td>
+                <td>음/양</td>
                 <td>성별</td>
                 <td>전화번호</td>
                 <td>주소</td>
             </tr>
-            <tr th:each="updateUser : ${updateUser}">
-                <td th:value="${updateUser.userId}"></td>
+            <tr th:each="updateUser, iterStat : ${updateUser}">
+                <td> <input type="text" name="userId" th:value="${updateUser.userId}" readonly></td>
                 <td> <input type="text" name="name" th:value="${updateUser.name}" required></td>
                 <td> <input type="text" name="englishName" th:value="${updateUser.englishName}"></td>
                 <td> <input type="date" name="birthDate" th:value="${#dates.format(updateUser.birthDate, 'yyyy-MM-dd')}"></td>
                 <td>
-                    <input type="radio" id="male" name="gender" value="남" th:checked="${updateUser.gender == '남'}" required>남
-                    <input type="radio" id="female" name="gender" value="여" th:checked="${updateUser.gender == '여'}" required>여
+                    <input type="radio" th:id="'lunar_' + ${iterStat.index}" th:name="'lunar_' + ${iterStat.index}" value="음" th:checked="${updateUser.lunarSolar == '음'}" required> 음
+                    <input type="radio" th:id="'solar_' + ${iterStat.index}" th:name="'solar_' + ${iterStat.index}" value="양" th:checked="${updateUser.lunarSolar == '양'}" required> 양
+                </td>
+                <td>
+                    <input type="radio" th:id="'male_' + ${iterStat.index}" th:name="'gender_' + ${iterStat.index}" value="남" th:checked="${updateUser.gender == '남'}" required>남
+                    <input type="radio" th:id="'female_' + ${iterStat.index}" th:name="'gender_' + ${iterStat.index}" value="여" th:checked="${updateUser.gender == '여'}" required>여
                 </td>
                 <td> <input type="text" name="phoneNumber" th:value="${updateUser.phoneNumber}"></td>
                 <td> <input type="text" name="address"th:value="${updateUser.address}"></td>
@@ -40,7 +45,35 @@
 </body>
 </html>
 <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const users = document.querySelectorAll('[th\\:each="updateUser, iterStat : ${updateUser}"]');
+        users.forEach(function (user, index) {
+            const maleRadio = user.querySelector(`#male_${index}`);
+            const femaleRadio = user.querySelector(`#female_${index}`);
+
+            const lunarRadio = user.querySelector(`#lunar_${index}`);
+            const solarRadio = user.querySelector(`#solar_${index}`);
+
+            const genderValue = "${updateUser.gender}".trim();
+            const lunarSolarValue = "${updateUser.lunarSolar}".trim();
+
+
+            if (genderValue === '남') {
+                maleRadio.checked = true;
+             } else if (genderValue === '여') {
+                femaleRadio.checked = true;
+            }
+
+            if (lunarSolarValue === '음') {
+                lunarRadio.checked = true;
+             } else if (lunarSolarValue === '양') {
+                solarRadio.checked = true;
+            }
+        });
+    });
+
     const addUserReq =()=> {
         location.href = "/bowling/add";
     }
+
 </script>

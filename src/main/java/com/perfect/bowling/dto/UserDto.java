@@ -19,8 +19,10 @@ public class UserDto {
     private String name;
     private String englishName;
 
-    @DateTimeFormat(pattern = "yy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthDate;
+
+    private String lunarSolar;
 
     private String gender;
     private String phoneNumber;
@@ -32,6 +34,7 @@ public class UserDto {
         userDto.setName(userEntity.getName());
         userDto.setEnglishName(userEntity.getEnglishName());
         userDto.setBirthDate(userEntity.getBirthDate());
+        userDto.setLunarSolar(userEntity.getLunarSolar());
         userDto.setGender(userEntity.getGender());
         userDto.setPhoneNumber(userEntity.getPhoneNumber());
         userDto.setAddress(userEntity.getAddress());

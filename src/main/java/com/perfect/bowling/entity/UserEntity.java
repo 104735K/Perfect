@@ -29,6 +29,9 @@ public class UserEntity {
     private Date birthDate;
 
     @Column
+    private String lunarSolar;
+
+    @Column
     private String gender;
 
     @Column
@@ -43,6 +46,7 @@ public class UserEntity {
         userEntity.setName(userDto.getName());
         userEntity.setEnglishName(userDto.getEnglishName());
         userEntity.setBirthDate(userDto.getBirthDate());
+        userEntity.setLunarSolar(userDto.getLunarSolar());
         userEntity.setGender(userDto.getGender());
         userEntity.setPhoneNumber(userDto.getPhoneNumber());
         userEntity.setAddress(userDto.getAddress());

@@ -10,6 +10,7 @@ import org.apache.catalina.User;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,8 +48,21 @@ public class UserServiceImpl implements UserService {
     public List<UserDto> updateUser(List<UserDto> userList) {
         List<UserDto> updatedUsers = new ArrayList<>();
         for (UserDto userDto : userList) {
-            UserDto updatedUser = (UserDto) updateUser((List<UserDto>) userDto);
-            updatedUsers.add(updatedUser);
+            Optional<UserEntity> optionalUserEntity = userRepository.findById(userDto.getUserId());
+            if (optionalUserEntity.isPresent()) {
+                UserEntity userEntity = optionalUserEntity.get();
+                userEntity.setUserId(userDto.getUserId());
+                userEntity.setName(userDto.getName());
+                userEntity.setEnglishName(userDto.getEnglishName());
+                userEntity.setBirthDate(userDto.getBirthDate());
+                userEntity.setLunarSolar(userDto.getLunarSolar());
+                userEntity.setGender(userDto.getGender());
+                userEntity.setPhoneNumber(userDto.getPhoneNumber());
+                userEntity.setAddress(userDto.getAddress());
+
+                userRepository.save(userEntity);
+                updatedUsers.add(UserDto.toUserDto(userEntity));
+            }
         }
         return updatedUsers;
     }
