@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>gameScore</title>
+</head>
+<body>
+<div>
+    <h2>게임정보</h2>
+</div>
+<div>
+    <b>게임날짜</b>
+    <span th:text="${#dates.format(game.gameDate, 'yyyy-MM-dd')}"></span>
+</div>
+<div>
+    <h2>게임점수</h2>
+</div>
+<div>
+    <table>
+        <tr>
+            <td>회원</td>
+            <td>G1</td>
+            <td>G2</td>
+            <td>G3</td>
+            <td>G4</td>
+            <td>HANDICAP</td>
+            <td>TOTAL SCORE</td>
+            <td>AVG SCORE</td>
+        </tr>
+        <tr th:each="score : ${scoreList}">
+            <td th:text="S{score.userId}"></td>
+            <td th:text="S{score.scoreG1}"></td>
+            <td th:text="S{score.scoreG2}"></td>
+            <td th:text="S{score.scoreG3}"></td>
+            <td th:text="S{score.scoreG4}"></td>
+            <td th:text="S{score.handicap}"></td>
+            <td th:text="S{score.totalScore}"></td>
+            <td th:text="S{score.avgScore}"></td>
+        </tr>
+    </table>
+</div>
+<button type="button" onclick="addScoreReq()">점수저장하기</button>
+</body>
+</html>
+<script>
+    const addScoreReq =()=> {
+        location.href = "/bowling/scores/add"
+    }
+</script>

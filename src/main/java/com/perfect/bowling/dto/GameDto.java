@@ -23,7 +23,6 @@ public class GameDto {
         GameDto gameDto = new GameDto();
         gameDto.setGameId(gameEntity.getGameId());
         gameDto.setGameDate(gameEntity.getGameDate());
-
         return gameDto;
     }
 }

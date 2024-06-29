@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>addScore</title>
+</head>
+<body>
+<div>
+    <form action="/bowling/scores/addScore" method="post" enctype="application/x-www-form-urlencoded" id="scoreForm">
+        <b>게임점수</b>
+        <input type="hidden" name="scoreId">
+        <table>
+            <tr>
+                <td>회원</td>
+                <td>G1</td>
+                <td>G2</td>
+                <td>G3</td>
+                <td>G4</td>
+                <td>HANDICAP</td>
+                <td>TOTAL SCORE</td>
+                <td>AVG SCORE</td>
+            </tr>
+            <tr th:each="user : ${users}">
+                <td><input name="userId" th:value="${user.userId}" th:text="${user.name}" th:readonly></td>
+                <td><input type="text" name="scoreG1" id="scoreG1_${user.userId}" class="score-input"></td>
+                <td><input type="text" name="scoreG2" id="scoreG2_${user.userId}" class="score-input"></td>
+                <td><input type="text" name="scoreG3" id="scoreG3_${user.userId}" class="score-input"></td>
+                <td><input type="text" name="scoreG4" id="scoreG4_${user.userId}" class="score-input"></td>
+                <td><input type="text" name="handicap"></td>
+                <td><input type="text" name="totalScore" id="totalScore_${user.userId}" readonly></td>
+                <td><input type="text" name="avgScore" id="avgScore_${user.userId}" readonly></td>
+            </tr>
+        </table>
+        <button type="submit">저장하기</button>
+    </form>
+</div>
+</body>
+<script>
+</script>
+</html>

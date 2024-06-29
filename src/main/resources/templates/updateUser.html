@@ -10,7 +10,7 @@
 </div>
 <div>
     <form action="/bowling/update/users" method="post" name="updateForm">
-        <table >
+        <table>
             <tr>
                 <td>ID</td>
                 <td>이름</td>
@@ -27,8 +27,10 @@
                 <td> <input type="text" name="englishName" th:value="${updateUser.englishName}"></td>
                 <td> <input type="date" name="birthDate" th:value="${#dates.format(updateUser.birthDate, 'yyyy-MM-dd')}"></td>
                 <td>
-                    <input type="radio" th:id="'lunar_' + ${iterStat.index}" th:name="'lunar_' + ${iterStat.index}" value="음" th:checked="${updateUser.lunarSolar == '음'}" required> 음
-                    <input type="radio" th:id="'solar_' + ${iterStat.index}" th:name="'solar_' + ${iterStat.index}" value="양" th:checked="${updateUser.lunarSolar == '양'}" required> 양
+                    <input type="radio" th:id="'lunar_' + ${iterStat.index}" th:name="'lunarSolar_' + ${iterStat.index}" value="음" th:checked="${updateUser.lunarSolar == '음'}" required> 음
+                    <input type="radio" th:id="'solar_' + ${iterStat.index}" th:name="'lunarSolar_' + ${iterStat.index}" value="양" th:checked="${updateUser.lunarSolar == '양'}" required> 양
+                    <input type="radio" th:id="'-_' + ${iterStat.index}" th:name="'lunarSolar_' + ${iterStat.index}" value="-" th:checked="${updateUser.lunarSolar == '-'}" required> -
+
                 </td>
                 <td>
                     <input type="radio" th:id="'male_' + ${iterStat.index}" th:name="'gender_' + ${iterStat.index}" value="남" th:checked="${updateUser.gender == '남'}" required>남
@@ -53,6 +55,7 @@
 
             const lunarRadio = user.querySelector(`#lunar_${index}`);
             const solarRadio = user.querySelector(`#solar_${index}`);
+            const noRadio = user.querySelector(`#-_${index}`);
 
             const genderValue = "${updateUser.gender}".trim();
             const lunarSolarValue = "${updateUser.lunarSolar}".trim();
@@ -68,6 +71,8 @@
                 lunarRadio.checked = true;
              } else if (lunarSolarValue === '양') {
                 solarRadio.checked = true;
+            } else (lunarSolarValue === '-') {
+                noRadio.checked = true;
             }
         });
     });

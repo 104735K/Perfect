@@ -5,8 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.apache.tomcat.websocket.server.WsContextListener;
-import org.hibernate.boot.archive.scan.spi.ScanParameters;
 
 @Getter
 @Setter
@@ -27,8 +25,12 @@ public class ScoreDto {
     public static ScoreDto toScoreDto (ScoreEntity scoreEntity) {
         ScoreDto scoreDto = new ScoreDto();
         scoreDto.setScoreId(scoreEntity.getScoreId());
-        scoreDto.setGameId(scoreEntity.getGameId().getGameId());
-        scoreDto.setUserId(scoreEntity.getUserId().getUserId());
+        scoreDto.setGameId(scoreEntity.getGameId());
+
+        if (scoreEntity.getUserId() != null) {
+            scoreDto.setUserId(scoreEntity.getUserId().getUserId());
+        }
+
         scoreDto.setScoreG1(scoreEntity.getScoreG1());
         scoreDto.setScoreG2(scoreEntity.getScoreG2());
         scoreDto.setScoreG3(scoreEntity.getScoreG3());

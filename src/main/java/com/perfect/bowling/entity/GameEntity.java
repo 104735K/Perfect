@@ -20,10 +20,10 @@ public class GameEntity {
     @Column
     private Date gameDate;
 
-    public static GameEntity saveGames (GameDto gameDto) {
-        GameEntity gameEntity = new GameEntity();
-        gameEntity.setGameId(gameDto.getGameId());
-        gameEntity.setGameDate(gameDto.getGameDate());
-        return gameEntity;
+    public static GameEntity saveGameEntity (GameDto gameDto) {
+        GameEntity gameEntity1 = new GameEntity();
+        gameEntity1.setGameId(gameDto.getGameId());
+        gameEntity1.setGameDate(gameDto.getGameDate());
+        return gameEntity1;
     }
 }

@@ -15,9 +15,8 @@ public class ScoreEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long scoreId;
 
-    @ManyToOne
-    @JoinColumn(name = "gameId", referencedColumnName = "gameId")
-    private GameEntity gameId;
+    @Column
+    private Long gameId;
 
     @ManyToOne
     @JoinColumn(name = "userId", referencedColumnName = "userId")
@@ -46,11 +45,9 @@ public class ScoreEntity {
 
     public static ScoreEntity saveScore (ScoreDto scoreDto) {
         ScoreEntity scoreEntity = new ScoreEntity();
-        scoreEntity.setScoreId(scoreDto.getScoreId());
 
-        GameEntity gameEntity = new GameEntity();
-        gameEntity.setGameId(scoreDto.getGameId());
-        scoreEntity.setGameId(gameEntity);
+        scoreEntity.setScoreId(scoreDto.getScoreId());
+        scoreEntity.setGameId(scoreDto.getGameId());
 
         UserEntity userEntity = new UserEntity();
         userEntity.setUserId(scoreDto.getUserId());

@@ -1,8 +1,10 @@
 package com.perfect.bowling.controller;
 
 import com.perfect.bowling.dto.GameDto;
+import com.perfect.bowling.dto.ScoreDto;
 import com.perfect.bowling.dto.UserDto;
 import com.perfect.bowling.service.GameService;
+import com.perfect.bowling.service.ScoreService;
 import com.perfect.bowling.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -11,12 +13,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
-import java.util.Date;
+import java.util.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 @RequestMapping("/bowling")
@@ -25,6 +24,7 @@ public class bowlingController {
 
     private UserService userService;
     private GameService gameService;
+    private ScoreService scoreService;
 
     @GetMapping("/users")
     public String users(Model model) {
@@ -57,7 +57,6 @@ public class bowlingController {
             String[] names = request.getParameterValues("name");
             String[] englishNames = request.getParameterValues("englishName");
             String[] birthDates = request.getParameterValues("birthDate");
-            String[] lunarSolars = request.getParameterValues("lunarSolar");
             String[] phoneNumbers = request.getParameterValues("phoneNumber");
             String[] addresses = request.getParameterValues("address");
 
@@ -78,7 +77,11 @@ public class bowlingController {
                     }
                 }
 
-                userDto.setLunarSolar(lunarSolars[i]);
+                String[] lunarSolar = request.getParameterValues("lunarSolar_" + i);
+                String lunarSolarString = Arrays.toString(lunarSolar);
+                lunarSolarString = lunarSolarString.replace("[", "").replace("]", "");
+                userDto.setLunarSolar(lunarSolarString);
+
 
                 String[] gender = request.getParameterValues("gender_" + i);
                 String genderString = Arrays.toString(gender);
@@ -99,13 +102,13 @@ public class bowlingController {
 
     @GetMapping("/games")
     public String games(Model model) {
-        List<GameDto> gameDtos = new ArrayList<>();
+        List<GameDto> gameDtos = gameService.findGames();
         model.addAttribute("gameList", gameDtos);
         return "games";
     }
     @GetMapping("/newGame")
     public String gameAddForm() {
-        return "newGame";
+        return "addGame";
     }
 
     @PostMapping("/addGame")
@@ -114,5 +117,17 @@ public class bowlingController {
         return "redirect:/bowling/games";
     }
 
-
+    @GetMapping("/games/{gameId}")
+    public String findById(@PathVariable Long gameId, Model model) {
+        Optional<GameDto> gameDto = Optional.ofNullable(gameService.findById(gameId));
+        if (gameDto.isPresent()) {
+            GameDto gameDto1 = gameDto.get();
+            model.addAttribute("game", gameDto1);
+        List<ScoreDto> scoreDtos = (List<ScoreDto>) scoreService.findById(gameId);
+        model.addAttribute("scoreList", scoreDtos);
+        }
+        return "gameScore";
+    }
 }
+
+
