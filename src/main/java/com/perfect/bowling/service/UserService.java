@@ -9,6 +9,7 @@ public interface UserService {
     void saveUser (UserDto userDto);
     List<UserDto> findUsers();
     UserDto findById(Long userId);
+    String findNameById(Long userId);
     List<UserDto> updateUser (List<UserDto> userDto);
     void deleteUser (UserDto userDto);
 }

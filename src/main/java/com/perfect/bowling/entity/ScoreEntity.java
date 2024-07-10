@@ -4,6 +4,7 @@ import com.perfect.bowling.dto.ScoreDto;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.catalina.User;
 
 @Entity
 @Getter
@@ -15,12 +16,16 @@ public class ScoreEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long scoreId;
 
-    @Column
-    private Long gameId;
+    @ManyToOne
+    @JoinColumn(name = "gameId", referencedColumnName = "gameId")
+    private GameEntity gameId;
 
     @ManyToOne
     @JoinColumn(name = "userId", referencedColumnName = "userId")
     private UserEntity userId;
+
+    @Column
+    private String userName;
 
     @Column
     private int scoreG1;
@@ -47,12 +52,16 @@ public class ScoreEntity {
         ScoreEntity scoreEntity = new ScoreEntity();
 
         scoreEntity.setScoreId(scoreDto.getScoreId());
-        scoreEntity.setGameId(scoreDto.getGameId());
+
+        GameEntity gameEntity = new GameEntity();
+        gameEntity.setGameId(scoreDto.getGameId());
+        scoreEntity.setGameId(gameEntity);
 
         UserEntity userEntity = new UserEntity();
         userEntity.setUserId(scoreDto.getUserId());
         scoreEntity.setUserId(userEntity);
 
+        scoreEntity.setUserName(scoreDto.getUserName());
         scoreEntity.setScoreG1(scoreDto.getScoreG1());
         scoreEntity.setScoreG2(scoreDto.getScoreG2());
         scoreEntity.setScoreG3(scoreDto.getScoreG3());

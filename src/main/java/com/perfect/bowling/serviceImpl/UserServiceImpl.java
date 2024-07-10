@@ -45,6 +45,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public String findNameById(Long userId) {
+        Optional<UserEntity> userEntity = userRepository.findById(userId);
+        if (userEntity.isPresent()) {
+            UserEntity userEntity1 = userEntity.get();
+            return userEntity1.getName();
+        }
+        return null;
+    }
+
+    @Override
     public List<UserDto> updateUser(List<UserDto> userList) {
         List<UserDto> updatedUsers = new ArrayList<>();
         for (UserDto userDto : userList) {

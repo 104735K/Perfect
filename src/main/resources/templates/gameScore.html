@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>gameScore</title>
+    <link rel="stylesheet" type="text/css" href="/css/gameScore.css">
+
 </head>
 <body>
 <div>
@@ -11,6 +13,8 @@
 <div>
     <b>게임날짜</b>
     <span th:text="${#dates.format(game.gameDate, 'yyyy-MM-dd')}"></span>
+    <b>참여인원</b>
+    <span th:text="${scoreList.size()}"></span> 명
 </div>
 <div>
     <h2>게임점수</h2>
@@ -18,7 +22,8 @@
 <div>
     <table>
         <tr>
-            <td>회원</td>
+            <td>회원ID</td>
+            <td>이름</td>
             <td>G1</td>
             <td>G2</td>
             <td>G3</td>
@@ -28,22 +33,133 @@
             <td>AVG SCORE</td>
         </tr>
         <tr th:each="score : ${scoreList}">
-            <td th:text="S{score.userId}"></td>
-            <td th:text="S{score.scoreG1}"></td>
-            <td th:text="S{score.scoreG2}"></td>
-            <td th:text="S{score.scoreG3}"></td>
-            <td th:text="S{score.scoreG4}"></td>
-            <td th:text="S{score.handicap}"></td>
-            <td th:text="S{score.totalScore}"></td>
-            <td th:text="S{score.avgScore}"></td>
+            <td th:text="${score.userId}"></td>
+            <td th:text="${score.userName}"></td>
+            <td th:text="${score.scoreG1}"></td>
+            <td th:text="${score.scoreG2}"></td>
+            <td th:text="${score.scoreG3}"></td>
+            <td th:text="${score.scoreG4}"></td>
+            <td th:text="${score.handicap}"></td>
+            <td th:text="${score.totalScore}"></td>
+            <td th:text="${score.avgScore}"></td>
         </tr>
     </table>
 </div>
-<button type="button" onclick="addScoreReq()">점수저장하기</button>
+<button class="saveModal">점수저장하기</button>
+<button onclick="openModal(this)">점수수정하기</button>
+
+<hr>
+
+<div class="modal" id="modal">
+    <div class="modal_body">
+        <form action="/bowling/games/{gameId}" method="post" enctype="application/x-www-form-urlencoded" id="scoreForm">
+            <input type="hidden" name="gameId" th:value="${game.gameId}">
+            <b>게임점수</b>
+            <table>
+                <tr>
+                    <td>회원ID</td>
+                    <td>이름</td>
+                    <td>참여 여부</td>
+                    <td>G1</td>
+                    <td>G2</td>
+                    <td>G3</td>
+                    <td>G4</td>
+                    <td>HANDICAP</td>
+                </tr>
+                <tr th:each="user, iterStat : ${users}">
+                    <td>
+                        <input type="hidden"  name="userId" th:value="${user.userId}" class="userId-input">
+                        <span th:text="${user.userId}"></span>
+                    </td>
+                    <td th:text="${user.name}" class="userName-input"></td>
+                    <td>
+                        <input type="radio"  th:name="users[__${iterStat.index}__].attendance" value="참여" checked onclick="toggleInputs(this)"> 참여
+                        <input type="radio"  th:name="users[__${iterStat.index}__].attendance" value="불참" onclick="toggleInputs(this)"> 불참
+                    </td>
+                    <td><input type="number" name="scoreG1" class="score-input" onchange="calculateTotalScore(this)"></td>
+                    <td><input type="number" name="scoreG2" class="score-input" onchange="calculateTotalScore(this)"></td>
+                    <td><input type="number" name="scoreG3" class="score-input" onchange="calculateTotalScore(this)"></td>
+                    <td><input type="number" name="scoreG4" class="score-input" onchange="calculateTotalScore(this)"></td>
+                    <td><input type="number" name="handicap"></td>
+                </tr>
+            </table>
+            <button type="submit">저장하기</button>
+        </form>
+        <button onclick="closeModal()">창닫기</button>
+    </div>
+</div>
+
+<div class="modal" id="updateModal">
+    <div class="modal_body">
+        <form action="/bowling/game/scores/updateScores" method="post" name="updateForm">
+            <table>
+                <tr>
+                    <td>회원ID</td>
+                    <td>이름</td>
+                    <td>G1</td>
+                    <td>G2</td>
+                    <td>G3</td>
+                    <td>G4</td>
+                    <td>HANDICAP</td>
+                </tr>
+                <tr th:each="updateScores : ${updateScores}">
+                    <td>
+                        <input type="hidden" name="scoreId" th:value="${updateScores.scoreId}">
+                        <input type="hidden" name="gameId" th:value="${updateScores.gameId}">
+                        <input type="hidden" name="userId" th:value="${updateScores.userId}">
+                        <span th:text="${updateScores.userId}"></span>
+                    </td>
+                    <td>
+                        <input type="hidden" name="userName" th:value="${updateScores.userName}">
+                        <span th:text="${updateScores.userName}"></span>
+
+                    </td>
+                    <td> <input type="number" name="scoreG1" th:value="${updateScores.scoreG1}"></td>
+                    <td> <input type="number" name="scoreG2" th:value="${updateScores.scoreG2}"></td>
+                    <td> <input type="number" name="scoreG3" th:value="${updateScores.scoreG3}"></td>
+                    <td> <input type="number" name="scoreG4" th:value="${updateScores.scoreG4}"></td>
+                    <td> <input type="number" name="handicap" th:value="${updateScores.handicap}"></td>
+                </tr>
+            </table>
+            <button type="submit">수정하기</button>
+        </form>
+        <button onclick="closeModal()">창닫기</button>
+    </div>
+</div>
+
+
 </body>
 </html>
 <script>
-    const addScoreReq =()=> {
-        location.href = "/bowling/scores/add"
+    const modal = document.querySelector('.modal');
+    const btnOpenModal=document.querySelector('.saveModal');
+
+    btnOpenModal.addEventListener("click", ()=>{
+        modal.style.display="flex";
+    });
+
+    function openModal(button) {
+        var modal = document.getElementById("updateModal");
+        modal.style.display = "flex";
+    }
+
+     function closeModal() {
+          var modal = document.getElementById('modal');
+          modal.style.display = 'none';
+     }
+
+    function toggleInputs(radio) {
+        var row = radio.closest("tr");
+        var inputs = row.querySelectorAll(".score-input, input[name='handicap'], .userId-input, .userName-input");
+
+        if (radio.value === "불참") {
+            inputs.forEach(function(input) {
+                input.disabled = true;
+            });
+        } else {
+            inputs.forEach(function(input) {
+                input.disabled = false;
+            });
+        }
     }
 </script>

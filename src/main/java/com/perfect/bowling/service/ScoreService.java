@@ -10,4 +10,5 @@ public interface ScoreService {
     ScoreDto findById(Long scoreId);
     List<ScoreDto> updateScore (List<ScoreDto> scoreDto);
     void deleteScore (ScoreDto scoreDto);
+    List<ScoreDto> getScoresByGameId(Long gameId);
 }

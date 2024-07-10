@@ -9,6 +9,7 @@ import com.perfect.bowling.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -118,14 +119,20 @@ public class bowlingController {
     }
 
     @GetMapping("/games/{gameId}")
-    public String findById(@PathVariable Long gameId, Model model) {
+    public String findById(@PathVariable Long gameId, Model model, @ModelAttribute ScoreDto scoreDto) {
         Optional<GameDto> gameDto = Optional.ofNullable(gameService.findById(gameId));
         if (gameDto.isPresent()) {
             GameDto gameDto1 = gameDto.get();
             model.addAttribute("game", gameDto1);
-        List<ScoreDto> scoreDtos = (List<ScoreDto>) scoreService.findById(gameId);
-        model.addAttribute("scoreList", scoreDtos);
+
+            List<ScoreDto> scoreDtos = scoreService.getScoresByGameId(gameId);
+            model.addAttribute("scoreList", scoreDtos);
         }
+            List<UserDto> userDtos = userService.findUsers();
+            model.addAttribute("users", userDtos);
+
+            List<ScoreDto> scoreDtoList = scoreService.getScoresByGameId(gameId);
+            model.addAttribute("updateScores", scoreDtoList);
         return "gameScore";
     }
 }
