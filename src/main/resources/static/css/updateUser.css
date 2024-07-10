@@ -1,0 +1,29 @@
+.header{font-size:25px; text-align:center;}
+.center{font-align:center;}
+.center1{font-align:center; margin:60px 0 70px 730px;}
+hr{width:90%; border-bottom:0.3px solid red ;}
+
+table{width:80%; font-size:13px; text-align:center; table-layout:fixed; border-collapse:collapse; margin:50px 0 0 140px; border-radius:20px;}
+th, td {border: 1px solid grey; padding: 10px; text-align:center;}
+
+.table1{width:35px;}
+.table2{width:90px;}
+.table3{width:140px;}
+.table4{width:150px;}
+.table5{width:110px;}
+.table6{width:160px;}
+.table7{width:85px;}
+
+.textbox {width:80px; height:10px; margin:5px auto; font-size:12px; text-align:center;border-radius: 5px; border: 1px solid #ccc; padding: 5px;}
+.textbox1 {width:120px; height:10px; margin:5px auto; font-size:12px; text-align:center;border-radius: 5px; border: 1px solid #ccc; padding: 5px;}
+.textbox2 {width:140px; height:10px; margin:5px auto; font-size:12px; text-align:center;border-radius: 5px; border: 1px solid #ccc; padding: 5px;}
+.textbox3 {width:300px; height:10px; margin:5px auto; font-size:12px; text-align:center;border-radius: 5px; border: 1px solid #ccc; padding: 5px;}
+
+.deleteUser{width:23px; height:23px; background-color:red; border: none; color:white; font-size:10px; text-align:center; transition: color 0.3s; border-radius:40px;}
+.deleteUser:hover {background-color:transparent; color:red; border: 1px solid red; font-size:10px; border-radius:40px;}
+
+.saveBtn{width:150px; height:25px; background-color:green; color:white; border: none; font-size:13px; border-radius:5px; text-align:center; transition: color 0.3s; margin-right:5px;}
+.saveBtn:hover {background-color:transparent; color:green; border: 1px solid green; font-size:13px; border-radius:5px;}
+
+.cancelBtn {width:150px; height:25px; background-color:orange; color:white; border: none; font-size:13px; border-radius:5px; text-align:center; transition: color 0.3s; margin-right:5px;}
+.cancelBtn:hover {background-color:transparent; color:orange; border: 1px solid orange; font-size:13px; border-radius:5px;}

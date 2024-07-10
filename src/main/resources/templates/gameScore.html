@@ -7,30 +7,32 @@
 
 </head>
 <body>
-<div>
-    <h2>게임정보</h2>
-</div>
-<div>
+</br>
+    <div class="header">
+        <h2>게임정보</h2>
+    </div>
+<hr>
+<div class="center">
     <b>게임날짜</b>
     <span th:text="${#dates.format(game.gameDate, 'yyyy-MM-dd')}"></span>
     <b>참여인원</b>
     <span th:text="${scoreList.size()}"></span> 명
 </div>
-<div>
+<div class="header1">
     <h2>게임점수</h2>
 </div>
 <div>
     <table>
         <tr>
-            <td>회원ID</td>
-            <td>이름</td>
-            <td>G1</td>
-            <td>G2</td>
-            <td>G3</td>
-            <td>G4</td>
-            <td>HANDICAP</td>
-            <td>TOTAL SCORE</td>
-            <td>AVG SCORE</td>
+            <td class="table1">회원ID</td>
+            <td class="table2">이름</td>
+            <td class="table3">G1</td>
+            <td class="table3">G2</td>
+            <td class="table3">G3</td>
+            <td class="table3">G4</td>
+            <td class="table3">HANDICAP</td>
+            <td class="table3">TOTAL SCORE</td>
+            <td class="table3">AVG SCORE</td>
         </tr>
         <tr th:each="score : ${scoreList}">
             <td th:text="${score.userId}"></td>
@@ -45,26 +47,30 @@
         </tr>
     </table>
 </div>
-<button class="saveModal">점수저장하기</button>
-<button onclick="openModal(this)">점수수정하기</button>
-
-<hr>
+<div class="padding3">
+    <button type="button" onclick="cancel()" class="cancelBtn">↩︎</button>
+    <button class="saveModal">+</button>
+    <button onclick="openModal(this)">점수수정하기</button>
+</div>
 
 <div class="modal" id="modal">
     <div class="modal_body">
+        <button type="button" class="closeModal" >X</button>
+        <div class="modalHeader">
+            <h2>게임점수</h2>
+        </div>
         <form action="/bowling/games/{gameId}" method="post" enctype="application/x-www-form-urlencoded" id="scoreForm">
             <input type="hidden" name="gameId" th:value="${game.gameId}">
-            <b>게임점수</b>
-            <table>
+            <table class="table0">
                 <tr>
-                    <td>회원ID</td>
-                    <td>이름</td>
-                    <td>참여 여부</td>
-                    <td>G1</td>
-                    <td>G2</td>
-                    <td>G3</td>
-                    <td>G4</td>
-                    <td>HANDICAP</td>
+                    <td class="table0-1">회원ID</td>
+                    <td class="table0-2">이름</td>
+                    <td class="table0-3">참여 여부</td>
+                    <td class="table0-4">G1</td>
+                    <td class="table0-4">G2</td>
+                    <td class="table0-4">G3</td>
+                    <td class="table0-4">G4</td>
+                    <td class="table0-4">HANDICAP</td>
                 </tr>
                 <tr th:each="user, iterStat : ${users}">
                     <td>
@@ -80,27 +86,30 @@
                     <td><input type="number" name="scoreG2" class="score-input" onchange="calculateTotalScore(this)"></td>
                     <td><input type="number" name="scoreG3" class="score-input" onchange="calculateTotalScore(this)"></td>
                     <td><input type="number" name="scoreG4" class="score-input" onchange="calculateTotalScore(this)"></td>
-                    <td><input type="number" name="handicap" value="0"></td>
+                    <td><input type="number" name="handicap" class="score-input" value="0"></td>
                 </tr>
             </table>
-            <button type="submit">저장하기</button>
+            <button type="submit" class="button">✓</button>
         </form>
-        <button onclick="closeModal()">창닫기</button>
     </div>
 </div>
 
 <div class="modal" id="updateModal">
     <div class="modal_body">
+        <button type="button" class="closeModal" >X</button>
+        <div class="modalHeader">
+            <h2>점수 수정</h2>
+        </div>
         <form action="/bowling/game/scores/updateScores" method="post" name="updateForm">
-            <table>
+            <table class="table0">
                 <tr>
-                    <td>회원ID</td>
-                    <td>이름</td>
-                    <td>G1</td>
-                    <td>G2</td>
-                    <td>G3</td>
-                    <td>G4</td>
-                    <td>HANDICAP</td>
+                    <td class="table0-1">회원ID</td>
+                    <td class="table0-2">이름</td>
+                    <td class="table0-4">G1</td>
+                    <td class="table0-4">G2</td>
+                    <td class="table0-4">G3</td>
+                    <td class="table0-4">G4</td>
+                    <td class="table0-4">HANDICAP</td>
                 </tr>
                 <tr th:each="updateScores : ${updateScores}">
                     <td>
@@ -113,16 +122,15 @@
                         <input type="hidden" name="userName" th:value="${updateScores.userName}">
                         <span th:text="${updateScores.userName}"></span>
                     </td>
-                    <td> <input type="number" name="scoreG1" th:value="${updateScores.scoreG1}"></td>
-                    <td> <input type="number" name="scoreG2" th:value="${updateScores.scoreG2}"></td>
-                    <td> <input type="number" name="scoreG3" th:value="${updateScores.scoreG3}"></td>
-                    <td> <input type="number" name="scoreG4" th:value="${updateScores.scoreG4}"></td>
-                    <td> <input type="number" name="handicap" th:value="${updateScores.handicap}"></td>
+                    <td> <input type="number" name="scoreG1" th:value="${updateScores.scoreG1}" class="textbox"></td>
+                    <td> <input type="number" name="scoreG2" th:value="${updateScores.scoreG2}" class="textbox"></td>
+                    <td> <input type="number" name="scoreG3" th:value="${updateScores.scoreG3}" class="textbox"></td>
+                    <td> <input type="number" name="scoreG4" th:value="${updateScores.scoreG4}" class="textbox"></td>
+                    <td> <input type="number" name="handicap" th:value="${updateScores.handicap}" class="textbox"></td>
                 </tr>
             </table>
-            <button type="submit">수정하기</button>
+            <button type="submit" class="button">✓</button>
         </form>
-        <button onclick="closeModal()">창닫기</button>
     </div>
 </div>
 </body>
@@ -130,20 +138,21 @@
 <script>
     const modal = document.querySelector('.modal');
     const btnOpenModal=document.querySelector('.saveModal');
+    const closeModalBtn = document.querySelector('.closeModal');
+
 
     btnOpenModal.addEventListener("click", ()=>{
         modal.style.display="flex";
+    });
+
+     closeModalBtn.addEventListener("click", () => {
+        modal.style.display = 'none';
     });
 
     function openModal(button) {
         var modal = document.getElementById("updateModal");
         modal.style.display = "flex";
     }
-
-     function closeModal() {
-          var modal = document.getElementById('modal');
-          modal.style.display = 'none';
-     }
 
     function toggleInputs(radio) {
         var row = radio.closest("tr");
@@ -158,5 +167,9 @@
                 input.disabled = false;
             });
         }
+    }
+
+    const cancel =()=> {
+        location.href = "/bowling/games";
     }
 </script>

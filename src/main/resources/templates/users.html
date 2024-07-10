@@ -4,14 +4,26 @@
     <meta charset="UTF-8">
     <title>users</title>
     <link rel="stylesheet" type="text/css" href="/css/users.css">
-
 </head>
 <body>
 </br>
-<div class="header">
-    <h2>회원정보</h2>
+<div class="ptop">
+<div class="top">
+    <div class="header">
+        <h2>회원정보</h2>
+    </div>
+    <hr>
 </div>
-<hr>
+<div class="left">
+    <div class="side">
+        <div class="sideB">
+            <button type="button" onclick="homeReq()" class="btn1">🏠</button><br>
+            <button type="button" onclick="userReq()" class="btn1">👥</button><br>
+            <button type="button" onclick="gameReq()" class="btn1">🎳</button>
+        </div>
+    </div>
+</div>
+<div class="right">
 <div>
     <div>
         <table>
@@ -37,13 +49,15 @@
             </tr>
         </table>
     </div>
-</div>
 </br>
 <div class="center">
-    <button type="button" class="addModal" >회원추가</button>
+    <button type="button" class="addModal" >+</button>
     <button type="button" onclick="updateUserReq()" >회원수정</button>
 </div>
-
+</div>
+</div>
+<div class="bottom"></div>
+</div>
 <div class="modal" id="modal">
     <div class="modal_body">
             <button type="button" class="closeModal" >X</button>
@@ -91,7 +105,7 @@
                     </div>
                     </div>
                     <div class="padding3">
-                        <input type="submit" value="V" class="button">
+                        <input type="submit" value="✓" class="button">
                     </div>
                     </div>
             </form>
@@ -101,6 +115,18 @@
 </body>
 </html>
 <script>
+    const homeReq = () => {
+        location.href = "/bowling/home";
+    };
+
+    const userReq = () => {
+        location.href = "/bowling/users";
+    };
+
+    const gameReq = () => {
+        location.href = "/bowling/games";
+    };
+
     const addUserReq =()=> {
         location.href = "/bowling/add";
     }
