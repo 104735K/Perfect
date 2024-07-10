@@ -3,38 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <title>users</title>
+    <link rel="stylesheet" type="text/css" href="/css/users.css">
+
 </head>
 <body>
-<div>
-    <h2>회원목록</h2>
+</br>
+<div class="header">
+    <h2>회원정보</h2>
 </div>
+<hr>
 <div>
-    <table>
-        <tr>
-            <td>ID</td>
-            <td>이름</td>
-            <td>영문명</td>
-            <td>생년월일</td>
-            <td>음/양</td>
-            <td>성별</td>
-            <td>전화번호</td>
-            <td>주소</td>
-        </tr>
-        <tr th:each="user : ${userList}">
-            <td th:text="${user.userId}"></td>
-            <td th:text="${user.name}"></td>
-            <td th:text="${user.englishName}"></td>
-            <td th:text="${#dates.format(user.birthDate, 'yyyy-MM-dd')}"></td>
-            <td th:text="${user.lunarSolar}"></td>
-            <td th:text="${user.gender}"></td>
-            <td th:text="${user.phoneNumber}"></td>
-            <td th:text="${user.address}"></td>
-        </tr>
-    </table>
+    <div>
+        <table>
+            <tr>
+                <td class="table1">ID</td>
+                <td class="table2">이름</td>
+                <td class="table3">영문명</td>
+                <td class="table4">생년월일</td>
+                <td class="table5">음/양</td>
+                <td class="table5">성별</td>
+                <td class="table6">전화번호</td>
+                <td>주소</td>
+            </tr>
+            <tr th:each="user : ${userList}">
+                <td th:text="${user.userId}"></td>
+                <td th:text="${user.name}"></td>
+                <td th:text="${user.englishName}"></td>
+                <td th:text="${#dates.format(user.birthDate, 'yyyy-MM-dd')}"></td>
+                <td th:text="${user.lunarSolar}"></td>
+                <td th:text="${user.gender}"></td>
+                <td th:text="${user.phoneNumber}"></td>
+                <td th:text="${user.address}"></td>
+            </tr>
+        </table>
+    </div>
 </div>
-<button type="button" onclick="addUserReq()">회원추가</button>
-<button type="button" onclick="updateUserReq()">회원수정</button>
+</br>
+<div class="center">
+    <button type="button" class="addModal" >회원추가</button>
+    <button type="button" onclick="updateUserReq()" >회원수정</button>
+</div>
 
+<div class="modal" id="modal">
+    <div class="modal_body">
+            <button type="button" class="closeModal" >X</button>
+        <div class="modalHeader">
+            <h2>회원추가</h2>
+        </div>
+        <div>
+            <form action="/bowling/addUser" method="post" enctype="application/x-www-form-urlencoded">
+                <div class="container">
+                    <div class="padding">
+                    <div class="padding1">
+                        <div class="padding1-1">
+                            <p>회원이름</p>
+                            <input type="text" name="name" class="textbox" required>
+                        </div>
+                        <div class="padding1-2">
+                            <p>영문명</p>
+                            <input type="text" name="englishName" class="textbox1">
+                        </div>
+                        <div class="padding1-3">
+                            <p>생년월일</p>
+                            <input type="date" name="birthDate" class="textbox2">
+                        </div>
+                        <div class="padding1-4">
+                        <p>음/양</p>
+                            <input type="radio" id="lunar" name="lunarSolar" value="음" required>음
+                            <input type="radio" id="solar" name="lunarSolar" value="양" required>양
+                            <input type="radio" id="-" name="lunarSolar" value="-" required>-
+                        </div>
+                        <div class="padding1-4">
+                            <p>성별</p>
+                            <input type="radio" id="male" name="gender" value="남" required>남
+                            <input type="radio" id="female" name="gender" value="여" required>여
+                        </div>
+                    </div>
+                    <div class="padding2">
+                        <div class="padding2-2">
+                            <p>전화번호</p>
+                            <input type="text" name="phoneNumber" class="textbox2">
+                        </div>
+                        <div class="padding2-3">
+                            <p>주소</p>
+                            <input type="text" name="address" class="textbox3">
+                        </div>
+                    </div>
+                    </div>
+                    <div class="padding3">
+                        <input type="submit" value="V" class="button">
+                    </div>
+                    </div>
+            </form>
+        </div>
+    </div>
+</div>
 </body>
 </html>
 <script>
@@ -45,4 +108,16 @@
     const updateUserReq =()=> {
         location.href = "/bowling/update";
     }
+
+    const modal = document.querySelector('.modal');
+    const btnOpenModal=document.querySelector('.addModal');
+    const closeModalBtn = document.querySelector('.closeModal');
+
+     btnOpenModal.addEventListener("click", ()=>{
+        modal.style.display="flex";
+    });
+
+    closeModalBtn.addEventListener("click", () => {
+        modal.style.display = 'none';
+    });
 </script>

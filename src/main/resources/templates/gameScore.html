@@ -80,7 +80,7 @@
                     <td><input type="number" name="scoreG2" class="score-input" onchange="calculateTotalScore(this)"></td>
                     <td><input type="number" name="scoreG3" class="score-input" onchange="calculateTotalScore(this)"></td>
                     <td><input type="number" name="scoreG4" class="score-input" onchange="calculateTotalScore(this)"></td>
-                    <td><input type="number" name="handicap"></td>
+                    <td><input type="number" name="handicap" value="0"></td>
                 </tr>
             </table>
             <button type="submit">저장하기</button>
@@ -112,7 +112,6 @@
                     <td>
                         <input type="hidden" name="userName" th:value="${updateScores.userName}">
                         <span th:text="${updateScores.userName}"></span>
-
                     </td>
                     <td> <input type="number" name="scoreG1" th:value="${updateScores.scoreG1}"></td>
                     <td> <input type="number" name="scoreG2" th:value="${updateScores.scoreG2}"></td>
@@ -126,8 +125,6 @@
         <button onclick="closeModal()">창닫기</button>
     </div>
 </div>
-
-
 </body>
 </html>
 <script>
@@ -155,9 +152,9 @@
         if (radio.value === "불참") {
             inputs.forEach(function(input) {
                 input.disabled = true;
-            });
-        } else {
-            inputs.forEach(function(input) {
+         });
+            } else {
+                inputs.forEach(function(input) {
                 input.disabled = false;
             });
         }

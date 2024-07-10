@@ -20,6 +20,7 @@
                 <td>성별</td>
                 <td>전화번호</td>
                 <td>주소</td>
+                <td></td>
             </tr>
             <tr th:each="updateUser, iterStat : ${updateUser}">
                 <td> <input type="text" name="userId" th:value="${updateUser.userId}" readonly></td>
@@ -38,6 +39,7 @@
                 </td>
                 <td> <input type="text" name="phoneNumber" th:value="${updateUser.phoneNumber}"></td>
                 <td> <input type="text" name="address"th:value="${updateUser.address}"></td>
+                <td> <button type="button" onclick="deleteUser('${updateUser.userId}')">삭제</button> </td>
             </tr>
         </table>
         <button type="submit">수정하기</button>
@@ -71,7 +73,7 @@
                 lunarRadio.checked = true;
              } else if (lunarSolarValue === '양') {
                 solarRadio.checked = true;
-            } else (lunarSolarValue === '-') {
+            } else {
                 noRadio.checked = true;
             }
         });
@@ -79,6 +81,12 @@
 
     const addUserReq =()=> {
         location.href = "/bowling/add";
+    }
+
+    function deleteUser(userId) {
+        if (confirm("정말로 이 회원을 삭제하시겠습니까?")) {
+            location.href = "/bowling/delete/" + userId;
+        }
     }
 
 </script>

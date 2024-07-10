@@ -101,6 +101,12 @@ public class bowlingController {
         return "redirect:/bowling/users";
     }
 
+    @GetMapping("/delete/{userId}")
+    public String delete(@PathVariable("userId") Long userId) {
+        userService.deleteUser(userId);
+        return "redirect:/bowling/users";
+    }
+
     @GetMapping("/games")
     public String games(Model model) {
         List<GameDto> gameDtos = gameService.findGames();
@@ -126,12 +132,14 @@ public class bowlingController {
             model.addAttribute("game", gameDto1);
 
             List<ScoreDto> scoreDtos = scoreService.getScoresByGameId(gameId);
+            scoreDtos.sort(Comparator.comparing(ScoreDto::getUserId));
             model.addAttribute("scoreList", scoreDtos);
         }
             List<UserDto> userDtos = userService.findUsers();
             model.addAttribute("users", userDtos);
 
             List<ScoreDto> scoreDtoList = scoreService.getScoresByGameId(gameId);
+            scoreDtoList.sort(Comparator.comparing(ScoreDto::getUserId));
             model.addAttribute("updateScores", scoreDtoList);
         return "gameScore";
     }
