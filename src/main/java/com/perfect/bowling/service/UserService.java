@@ -11,5 +11,5 @@ public interface UserService {
     UserDto findById(Long userId);
     String findNameById(Long userId);
     List<UserDto> updateUser (List<UserDto> userDto);
-    void deleteUser (Long userId);
+    void deleteUser (String userId);
 }

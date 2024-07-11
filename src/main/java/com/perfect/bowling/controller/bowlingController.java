@@ -102,9 +102,9 @@ public class bowlingController {
     }
 
     @GetMapping("/delete/{userId}")
-    public String delete(@PathVariable("userId") Long userId) {
+    public String delete(@PathVariable String userId) {
         userService.deleteUser(userId);
-        return "redirect:/bowling/users";
+        return "redirect:/bowling/update";
     }
 
     @GetMapping("/games")

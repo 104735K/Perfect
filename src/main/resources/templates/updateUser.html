@@ -28,7 +28,7 @@
             </tr>
             <tr th:each="updateUser, iterStat : ${updateUser}">
                 <td>
-                    <input type="hidden" name="userId" th:value="${updateUser.userId}">
+                    <input type="hidden" name="userId" id="userId" th:value="${updateUser.userId}">
                     <span th:text="${updateUser.userId}"></span>
                 </td>
                 <td> <input type="text" name="name" th:value="${updateUser.name}" required class="textbox"></td>
@@ -45,19 +45,18 @@
                     <input type="radio" th:id="'female_' + ${iterStat.index}" th:name="'gender_' + ${iterStat.index}" value="여" th:checked="${updateUser.gender == '여'}" required>여
                 </td>
                 <td> <input type="text" name="phoneNumber" th:value="${updateUser.phoneNumber}" class="textbox2"></td>
-                <td> <input type="text" name="address"th:value="${updateUser.address}" class="textbox3"></td>
-                <td> <button type="button" onclick="deleteUser('${updateUser.userId}')" class="deleteUser">X</button> </td>
+                <td> <input type="text" name="address" th:value="${updateUser.address}" class="textbox3"></td>
+                <td> <button type="button" th:onclick="deleteUser([[${updateUser.userId}]])"  class="deleteUser">X</button> </td>
             </tr>
         </table>
         <div class="center1">
-            <button type="button" onclick="cancel()" class="cancelBtn">↩︎</button>
+            <button type="button" onclick="cancelUpdate()" class="cancelBtn">↩︎</button>
             <button type="submit" class="saveBtn">✓</button>
         </div>
     </form>
 </div>
-</body>
-</html>
 <script>
+
     document.addEventListener('DOMContentLoaded', function () {
         const users = document.querySelectorAll('[th\\:each="updateUser, iterStat : ${updateUser}"]');
         users.forEach(function (user, index) {
@@ -88,14 +87,21 @@
         });
     });
 
-    const cancel =()=> {
+    function cancelUpdate() {
         location.href = "/bowling/users";
     }
 
-    function deleteUser(userId) {
-        if (confirm("정말로 이 회원을 삭제하시겠습니까?")) {
-            location.href = "/bowling/delete/" + userId;
+    function deleteUser(g) {
+        console.log(g);
+        if(confirm("회원을 삭제하시겠습니까?")) {
+            location.href = "/bowling/delete/" + g;
         }
     }
 
+
+
+
+
 </script>
+</body>
+</html>
