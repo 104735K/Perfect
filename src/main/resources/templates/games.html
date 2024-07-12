@@ -30,9 +30,12 @@
                 <td>게임날짜</td>
             </tr>
             <tr th:each="gameDto : ${gameList}">
-                <td th:text ="${gameDto.gameId}"></td>
+                <td th:text ="${gameDto.gameId}">
+                    <input type="hidden" class="gameId" th:value="${gameDto.gameId}">
+                </td>
                 <td>
-                    <a th:href="@{|/bowling/games/${gameDto.gameId}|}" th:text="${#dates.format(gameDto.gameDate, 'yyyy-MM-dd')}"></a>
+                    <a th:href="@{|/bowling/games/${gameDto.gameId}|}" th:text="${#dates.format(gameDto.gameDate, 'yyyy-MM-dd')}" ></a>
+                    <input type="hidden" class="gameDate" th:value="${gameDto.gameDate}">
                 </td>
             </tr>
         </table>
@@ -60,6 +63,7 @@
         </div>
     </div>
 </div>
+
 </body>
 <script>
     const homeReq = () => {

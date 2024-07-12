@@ -51,6 +51,8 @@
     <button type="button" onclick="cancel()" class="cancelBtn">↩︎</button>
     <button class="saveModal">+</button>
     <button onclick="openModal(this)">점수수정하기</button>
+    <button onclick="GameModal()">게임수정하기</button>
+
 </div>
 
 <div class="modal" id="modal">
@@ -96,7 +98,7 @@
 
 <div class="modal" id="updateModal">
     <div class="modal_body">
-        <button type="button" class="closeModal" >X</button>
+        <button type="button" class="closeModal" onclick="closeModal()" >X</button>
         <div class="modalHeader">
             <h2>점수 수정</h2>
         </div>
@@ -110,6 +112,7 @@
                     <td class="table0-4">G3</td>
                     <td class="table0-4">G4</td>
                     <td class="table0-4">HANDICAP</td>
+                    <td></td>
                 </tr>
                 <tr th:each="updateScores : ${updateScores}">
                     <td>
@@ -127,12 +130,34 @@
                     <td> <input type="number" name="scoreG3" th:value="${updateScores.scoreG3}" class="textbox"></td>
                     <td> <input type="number" name="scoreG4" th:value="${updateScores.scoreG4}" class="textbox"></td>
                     <td> <input type="number" name="handicap" th:value="${updateScores.handicap}" class="textbox"></td>
+                    <td> <button type="button" th:onclick="deleteScore([[${updateScores.scoreId}]])"  class="deleteScore">X</button></td>
                 </tr>
             </table>
             <button type="submit" class="button">✓</button>
         </form>
     </div>
 </div>
+
+<div class="modal" id="gameModal">
+    <div class="gameModal_body">
+        <button type="button" class="closeModal" onclick="closeGameModal()">X</button>
+        <div class="modalHeader">
+            <h2>게임수정</h2>
+        </div>
+        <div>
+            <form action="/bowling/game/update" method="post" enctype="application/x-www-form-urlencoded">
+                <p>게임날짜</p>
+                <input type="hidden" name="gameId" th:value="${gameUpdate.gameId}">
+                <input type="date" name="gameDate" class="textbox2" th:value="${#dates.format(gameUpdate.gameDate, 'yyyy-MM-dd')}"></br>
+                <div class="modalSave">
+                    <input type="submit" value="✓" class="button">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
 </body>
 </html>
 <script>
@@ -154,6 +179,21 @@
         modal.style.display = "flex";
     }
 
+    function GameModal(button) {
+        var modal = document.getElementById("gameModal");
+        modal.style.display = "flex";
+    }
+
+     function closeModal(button) {
+        var modal = document.getElementById("updateModal");
+        modal.style.display = "none";
+    }
+
+     function closeGameModal(button) {
+        var modal = document.getElementById("gameModal");
+        modal.style.display = "none";
+    }
+
     function toggleInputs(radio) {
         var row = radio.closest("tr");
         var inputs = row.querySelectorAll(".score-input, input[name='handicap'], .userId-input, .userName-input");
@@ -172,4 +212,12 @@
     const cancel =()=> {
         location.href = "/bowling/games";
     }
+
+    function deleteScore(g) {
+        console.log(g);
+        if(confirm("이 회원의 점수를 삭제하시겠습니까?")) {
+            location.href = "/bowling/game/scores/delete/" + g;
+        }
+    }
+
 </script>

@@ -4,6 +4,7 @@ import com.perfect.bowling.dto.GameDto;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -25,5 +26,12 @@ public class GameEntity {
         gameEntity1.setGameId(gameDto.getGameId());
         gameEntity1.setGameDate(gameDto.getGameDate());
         return gameEntity1;
+    }
+
+    public static GameEntity updateGameEntity (GameDto gameDto) {
+        GameEntity gameEntity = new GameEntity();
+        gameEntity.setGameId(gameDto.getGameId());
+        gameEntity.setGameDate(gameDto.getGameDate());
+        return gameEntity;
     }
 }

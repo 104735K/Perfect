@@ -9,6 +9,7 @@ import com.perfect.bowling.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -141,7 +142,24 @@ public class bowlingController {
             List<ScoreDto> scoreDtoList = scoreService.getScoresByGameId(gameId);
             scoreDtoList.sort(Comparator.comparing(ScoreDto::getUserId));
             model.addAttribute("updateScores", scoreDtoList);
+
+            GameDto gameDto1 = gameService.findById(gameId);
+            model.addAttribute("gameUpdate", gameDto1);
+
         return "gameScore";
+    }
+
+    @GetMapping("/game/update/{gameId}")
+    public String gameUpdateForm(@PathVariable Long gameId, Model model) {
+        GameDto gameDto = gameService.findById(gameId);
+        model.addAttribute("gameUpdate", gameDto);
+        return "updateGame";
+    }
+
+    @PostMapping("/game/update")
+    public String gameUpdate(@ModelAttribute GameDto gameDto, @RequestParam Long gameId) {
+        GameDto gameDto1 = gameService.updateGame(gameDto);
+        return "redirect:/bowling/games/" + gameId;
     }
 }
 

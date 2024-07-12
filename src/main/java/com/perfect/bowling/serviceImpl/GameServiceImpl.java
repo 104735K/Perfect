@@ -45,11 +45,12 @@ public class GameServiceImpl implements GameService {
 
     @Override
     public GameDto updateGame(GameDto gameDto) {
-        return null;
+        GameEntity gameEntity = GameEntity.updateGameEntity(gameDto);
+        gameRepository.save(gameEntity);
+        return findById(gameDto.getGameId());
     }
 
     @Override
     public void deleteGame(GameDto gameDto) {
-
     }
 }

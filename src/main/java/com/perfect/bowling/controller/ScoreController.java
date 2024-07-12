@@ -117,5 +117,12 @@ public class ScoreController {
         model.addAttribute("updateScores", scoreDto1);
         return "redirect:/bowling/games/" + gameId;
     }
+
+    @GetMapping("/game/scores/delete/{scoreId}")
+    public String deleteScore(@PathVariable Long scoreId, HttpServletRequest request) {
+        scoreService.deleteScore(scoreId);
+        String referer = request.getHeader("Referer");
+        return "redirect:" + referer ;
+    }
 }
 

@@ -92,8 +92,8 @@ public class ScoreServiceImpl implements ScoreService {
     }
 
     @Override
-    public void deleteScore(ScoreDto scoreDto) {
-
+    public void deleteScore(Long scoreId) {
+        scoreRepository.deleteById(scoreId);
     }
 
     @Override
@@ -101,7 +101,7 @@ public class ScoreServiceImpl implements ScoreService {
         List<ScoreEntity> scoreEntities = scoreRepository.findAll();
         List<ScoreDto> scoreDtos = new ArrayList<>();
         for (ScoreEntity scoreEntity : scoreEntities) {
-            if (scoreEntity.getGameId().getGameId().equals(gameId)) {
+            if (scoreEntity.getGameId() != null && scoreEntity.getGameId().getGameId().equals(gameId)) {
                 scoreDtos.add(ScoreDto.toScoreDto(scoreEntity));
             }
         }
