@@ -46,11 +46,11 @@
                 </td>
                 <td> <input type="text" name="phoneNumber" th:value="${updateUser.phoneNumber}" class="textbox2"></td>
                 <td> <input type="text" name="address" th:value="${updateUser.address}" class="textbox3"></td>
-                <td> <button type="button" th:onclick="deleteUser([[${updateUser.userId}]])"  class="deleteUser">X</button> </td>
+                <td> <button type="button" th:onclick="deleteUser([[${updateUser.userId}]])"  class="deleteUser">−</button> </td>
             </tr>
         </table>
         <div class="center1">
-            <button type="button" onclick="cancelUpdate()" class="cancelBtn">↩︎</button>
+            <button type="button" onclick="cancelUpdate()" class="cancelBtn">⏎</button>
             <button type="submit" class="saveBtn">✓</button>
         </div>
     </form>

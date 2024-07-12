@@ -48,11 +48,10 @@
     </table>
 </div>
 <div class="padding3">
-    <button type="button" onclick="cancel()" class="cancelBtn">↩︎</button>
-    <button class="saveModal">+</button>
-    <button onclick="openModal(this)">점수수정하기</button>
-    <button onclick="GameModal()">게임수정하기</button>
-
+    <button type="button" onclick="cancel()" class="cancelBtn">⏎</button>
+    <button class="saveModal">＋</button>
+    <button onclick="openModal(this)" class="updateScore">⬆</button>
+    <button onclick="GameModal()" class="updateGame">📅⬆</button>
 </div>
 
 <div class="modal" id="modal">
@@ -112,7 +111,7 @@
                     <td class="table0-4">G3</td>
                     <td class="table0-4">G4</td>
                     <td class="table0-4">HANDICAP</td>
-                    <td></td>
+                    <td class="table0-5"></td>
                 </tr>
                 <tr th:each="updateScores : ${updateScores}">
                     <td>
@@ -130,7 +129,7 @@
                     <td> <input type="number" name="scoreG3" th:value="${updateScores.scoreG3}" class="textbox"></td>
                     <td> <input type="number" name="scoreG4" th:value="${updateScores.scoreG4}" class="textbox"></td>
                     <td> <input type="number" name="handicap" th:value="${updateScores.handicap}" class="textbox"></td>
-                    <td> <button type="button" th:onclick="deleteScore([[${updateScores.scoreId}]])"  class="deleteScore">X</button></td>
+                    <td> <button type="button" th:onclick="deleteScore([[${updateScores.scoreId}]])"  class="deleteScore">−</button></td>
                 </tr>
             </table>
             <button type="submit" class="button">✓</button>

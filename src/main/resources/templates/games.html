@@ -17,9 +17,15 @@
     <div class="left">
         <div class="side">
             <div class="sideB">
-                <button type="button" onclick="homeReq()" class="btn1">🏠</button><br>
-                <button type="button" onclick="userReq()" class="btn1">👥</button><br>
-                <button type="button" onclick="gameReq()" class="btn1">🎳</button>
+                <button type="button" class="btn1" onmouseover="changeImage(true)" onmouseout="changeImage(false)">
+                    <img src="/images/iconsHomeBlack.png" onclick="homeReq()" class="sideBtn1" id="buttonImage">
+                </button></br>
+                <button type="button" class="btn1" onmouseover="changeImage2(true)" onmouseout="changeImage2(false)">
+                    <img src="/images/iconsUsersBlack.png" onclick="userReq()" class="sideBtn2" id="buttonImage2">
+                </button></br>
+                <button type="button" class="btn1">
+                    <img src="/images/iconsBowlingOrange.png" onclick="gameReq()" class="sideBtn3">
+                </button>
             </div>
         </div>
     </div>
@@ -89,6 +95,24 @@
     closeModalBtn.addEventListener("click", () => {
         modal.style.display = 'none';
     });
+
+    function changeImage(isHovering) {
+        var img = document.getElementById('buttonImage');
+        if (isHovering) {
+            img.src = '/images/iconsHomeRed.png';
+        } else {
+            img.src = '/images/iconsHomeBlack.png';
+        }
+    }
+
+    function changeImage2(isHovering) {
+        var img = document.getElementById('buttonImage2');
+        if (isHovering) {
+            img.src = '/images/iconsUsersBlue.png';
+        } else {
+            img.src = '/images/iconsUsersBlack.png';
+        }
+    }
 
 </script>
 </html>
