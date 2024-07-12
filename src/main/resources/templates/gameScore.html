@@ -52,6 +52,9 @@
     <button class="saveModal">＋</button>
     <button onclick="openModal(this)" class="updateScore">⬆</button>
     <button onclick="GameModal()" class="updateGame">📅⬆</button>
+    <button type="button" class="excelDownloadScores">
+        <img src="/images/iconsExcelGreen.png" onclick="excelDownloadScores()">
+    </button>
 </div>
 
 <div class="modal" id="modal">
@@ -61,7 +64,7 @@
             <h2>게임점수</h2>
         </div>
         <form action="/bowling/games/{gameId}" method="post" enctype="application/x-www-form-urlencoded" id="scoreForm">
-            <input type="hidden" name="gameId" th:value="${game.gameId}">
+            <input type="hidden" name="gameId" th:value="${game.gameId}" id="gameId">
             <table class="table0">
                 <tr>
                     <td class="table0-1">회원ID</td>
@@ -218,5 +221,10 @@
             location.href = "/bowling/game/scores/delete/" + g;
         }
     }
+
+    function excelDownloadScores() {
+    var gameId = document.getElementById("gameId").value;
+    location.href = "/bowling/downloadScoresByGameId/" + gameId;
+}
 
 </script>
