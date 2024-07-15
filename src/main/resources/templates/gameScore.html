@@ -37,10 +37,10 @@
         <tr th:each="score : ${scoreList}">
             <td th:text="${score.userId}"></td>
             <td th:text="${score.userName}"></td>
-            <td th:text="${score.scoreG1}"></td>
-            <td th:text="${score.scoreG2}"></td>
-            <td th:text="${score.scoreG3}"></td>
-            <td th:text="${score.scoreG4}"></td>
+            <td th:text="${score.scoreG1}" th:class="${score.scoreG1 ge 200} ? 'scoreHigh' : ''"></td>
+            <td th:text="${score.scoreG2}" th:class="${score.scoreG2 ge 200} ? 'scoreHigh' : ''"></td>
+            <td th:text="${score.scoreG3}" th:class="${score.scoreG3 ge 200} ? 'scoreHigh' : ''"></td>
+            <td th:text="${score.scoreG4}" th:class="${score.scoreG4 ge 200} ? 'scoreHigh' : ''"></td>
             <td th:text="${score.handicap}"></td>
             <td th:text="${score.totalScore}"></td>
             <td th:text="${score.avgScore}"></td>
@@ -86,10 +86,10 @@
                         <input type="radio"  th:name="users[__${iterStat.index}__].attendance" value="참여" checked onclick="toggleInputs(this)"> 참여
                         <input type="radio"  th:name="users[__${iterStat.index}__].attendance" value="불참" onclick="toggleInputs(this)"> 불참
                     </td>
-                    <td><input type="number" name="scoreG1" class="score-input" onchange="calculateTotalScore(this)"></td>
-                    <td><input type="number" name="scoreG2" class="score-input" onchange="calculateTotalScore(this)"></td>
-                    <td><input type="number" name="scoreG3" class="score-input" onchange="calculateTotalScore(this)"></td>
-                    <td><input type="number" name="scoreG4" class="score-input" onchange="calculateTotalScore(this)"></td>
+                    <td><input type="number" min="0" max="300" name="scoreG1" class="score-input" onchange="calculateTotalScore(this)"></td>
+                    <td><input type="number" min="0" max="300" name="scoreG2" class="score-input" onchange="calculateTotalScore(this)"></td>
+                    <td><input type="number" min="0" max="300" name="scoreG3" class="score-input" onchange="calculateTotalScore(this)"></td>
+                    <td><input type="number" min="0" max="300" name="scoreG4" class="score-input" onchange="calculateTotalScore(this)"></td>
                     <td><input type="number" name="handicap" class="score-input" value="0"></td>
                 </tr>
             </table>
@@ -127,10 +127,10 @@
                         <input type="hidden" name="userName" th:value="${updateScores.userName}">
                         <span th:text="${updateScores.userName}"></span>
                     </td>
-                    <td> <input type="number" name="scoreG1" th:value="${updateScores.scoreG1}" class="textbox"></td>
-                    <td> <input type="number" name="scoreG2" th:value="${updateScores.scoreG2}" class="textbox"></td>
-                    <td> <input type="number" name="scoreG3" th:value="${updateScores.scoreG3}" class="textbox"></td>
-                    <td> <input type="number" name="scoreG4" th:value="${updateScores.scoreG4}" class="textbox"></td>
+                    <td> <input type="number" min="0" max="300" name="scoreG1" th:value="${updateScores.scoreG1}" class="textbox"></td>
+                    <td> <input type="number" min="0" max="300" name="scoreG2" th:value="${updateScores.scoreG2}" class="textbox"></td>
+                    <td> <input type="number" min="0" max="300" name="scoreG3" th:value="${updateScores.scoreG3}" class="textbox"></td>
+                    <td> <input type="number" min="0" max="300" name="scoreG4" th:value="${updateScores.scoreG4}" class="textbox"></td>
                     <td> <input type="number" name="handicap" th:value="${updateScores.handicap}" class="textbox"></td>
                     <td> <button type="button" th:onclick="deleteScore([[${updateScores.scoreId}]])"  class="deleteScore">−</button></td>
                 </tr>

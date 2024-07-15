@@ -136,7 +136,7 @@ public class ExcelController {
                     MemberDataRow.createCell(2).setCellValue(scoreEntity.getScoreG1());
                     MemberDataRow.createCell(3).setCellValue(scoreEntity.getScoreG2());
                     MemberDataRow.createCell(4).setCellValue(scoreEntity.getScoreG3());
-                    MemberDataRow.createCell(6).setCellValue(scoreEntity.getScoreG4());
+                    MemberDataRow.createCell(5).setCellValue(scoreEntity.getScoreG4());
                     MemberDataRow.createCell(6).setCellValue(scoreEntity.getHandicap());
                     MemberDataRow.createCell(7).setCellValue(scoreEntity.getTotalScore());
                     MemberDataRow.createCell(8).setCellValue(scoreEntity.getAvgScore());
