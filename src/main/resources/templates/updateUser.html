@@ -12,7 +12,7 @@
     <h2>회원수정</h2>
 </div>
 <hr>
-<div class="center">
+<div>
     <form action="/bowling/update/users" method="post" name="updateForm">
         <table>
             <tr>
@@ -49,9 +49,11 @@
                 <td> <button type="button" th:onclick="deleteUser([[${updateUser.userId}]])"  class="deleteUser">−</button> </td>
             </tr>
         </table>
-        <div class="center1">
-            <button type="button" onclick="cancelUpdate()" class="cancelBtn">⏎</button>
-            <button type="submit" class="saveBtn">✓</button>
+        <div class="btnPadding">
+            <div class="center1">
+                <button type="button" onclick="cancelUpdate()" class="cancelBtn">⏎</button>
+                <button type="submit" class="saveBtn">✓</button>
+            </div>
         </div>
     </form>
 </div>
