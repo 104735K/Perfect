@@ -3,6 +3,7 @@ package com.perfect.bowling.service;
 import com.perfect.bowling.dto.GameDto;
 
 import java.util.List;
+import java.util.Map;
 
 public interface GameService {
     void saveGame (GameDto gameDto);
@@ -11,5 +12,4 @@ public interface GameService {
 
     GameDto updateGame (GameDto gameDto);
     void deleteGame (GameDto gameDto);
-
 }

@@ -24,18 +24,37 @@
                     <img src="/images/iconsUsersBlack.png" onclick="userReq()" class="sideBtn2" id="buttonImage2">
                 </button></br>
                 <button type="button" class="btn1">
-                    <img src="/images/iconsBowlingOrange.png" onclick="gameReq()" class="sideBtn3">
+                    <img src="/images/iconsBowlingGreen.png" onclick="gameReq()" class="sideBtn3">
+                </button>
+                <button type="button" class="btn1" onmouseover="changeImage4(true)" onmouseout="changeImage4(false)">
+                    <img src="/images/iconsMedalBlack.png" onclick="scoreReq()" class="sideBtn4" id="buttonImage4">
                 </button>
             </div>
         </div>
     </div>
     <div class="right">
-        <table>
+        <div class="monthBtns">
+<!-- 월별 게임 조회 버튼-->
+            <button onclick="allMonth()" class="monthBtn">ALL</button>
+            <button onclick="month1()" class="monthBtn">1월</button>
+            <button onclick="month2()" class="monthBtn">2월</button>
+            <button onclick="month3()" class="monthBtn">3월</button>
+            <button onclick="month4()" class="monthBtn">4월</button>
+            <button onclick="month5()" class="monthBtn">5월</button>
+            <button onclick="month6()" class="monthBtn">6월</button>
+            <button onclick="month7()" class="monthBtn">7월</button>
+            <button onclick="month8()" class="monthBtn">8월</button>
+            <button onclick="month9()" class="monthBtn">9월</button>
+            <button onclick="month10()" class="monthBtn">10월</button>
+            <button onclick="month11()" class="monthBtn">11월</button>
+            <button onclick="month12()" class="monthBtn">12월</button>
+        </div>
+        <table th:if="${not #lists.isEmpty(gameList)}">
             <tr>
                 <td class="table1">게임ID</td>
                 <td>게임날짜</td>
             </tr>
-            <tr th:each="gameDto : ${gameList}">
+            <tr th:each="gameDto : ${gameList}" >
                 <td th:text ="${gameDto.gameId}">
                     <input type="hidden" class="gameId" th:value="${gameDto.gameId}">
                 </td>
@@ -45,6 +64,10 @@
                 </td>
             </tr>
         </table>
+<!-- 저장된 게임이 없는 경우 -->
+        <div th:if="${#lists.isEmpty(gameList)}">
+            <p class="noGame">저장된 게임이 존재하지 않습니다.</p>
+        </div>
         <div class="btnPadding">
             <div class="center">
                 <button type="button" class="addGame">+</button>
@@ -53,7 +76,7 @@
     <div class="bottom"></div>
     </div>
 </div>
-
+<!-- 게임 추가 모달 창 -->
 <div class="modal" id="modal">
     <div class="modal_body">
             <button type="button" class="closeModal" >X</button>
@@ -86,6 +109,24 @@
         location.href = "/bowling/games";
     };
 
+    const scoreReq = () => {
+        location.href = "/bowling/rank";
+    };
+
+    const allMonth = () => { location.href = "/bowling/games" };
+    const month1 = () => { location.href = "/bowling/games/monthly?month=1" };
+    const month2 = () => { location.href = "/bowling/games/monthly?month=2" };
+    const month3 = () => { location.href = "/bowling/games/monthly?month=3" };
+    const month4 = () => { location.href = "/bowling/games/monthly?month=4" };
+    const month5 = () => { location.href = "/bowling/games/monthly?month=5" };
+    const month6 = () => { location.href = "/bowling/games/monthly?month=6" };
+    const month7 = () => { location.href = "/bowling/games/monthly?month=7" };
+    const month8 = () => { location.href = "/bowling/games/monthly?month=8" };
+    const month9 = () => { location.href = "/bowling/games/monthly?month=9" };
+    const month10 = () => { location.href = "/bowling/games/monthly?month=10" };
+    const month11 = () => { location.href = "/bowling/games/monthly?month=11" };
+    const month12 = () => { location.href = "/bowling/games/monthly?month=12" };
+
     const modal = document.querySelector('.modal');
     const btnOpenModal=document.querySelector('.addGame');
     const closeModalBtn = document.querySelector('.closeModal');
@@ -113,6 +154,15 @@
             img.src = '/images/iconsUsersBlue.png';
         } else {
             img.src = '/images/iconsUsersBlack.png';
+        }
+    }
+
+    function changeImage4(isHovering) {
+        var img = document.getElementById('buttonImage4');
+        if (isHovering) {
+            img.src = '/images/iconsMedalYellow.png';
+        } else {
+            img.src = '/images/iconsMedalBlack.png';
         }
     }
 

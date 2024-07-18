@@ -14,6 +14,7 @@
     </div>
     <hr>
 </div>
+<!-- 사이드 버튼 -->
 <div class="left">
     <div class="side">
         <div class="sideB">
@@ -25,6 +26,9 @@
             </button></br>
             <button type="button" class="btn1" onmouseover="changeImage3(true)" onmouseout="changeImage3(false)">
                 <img src="/images/iconsBowlingBlack.png" onclick="gameReq()" class="sideBtn3" id="buttonImage3">
+            </button>
+            <button type="button" class="btn1" onmouseover="changeImage4(true)" onmouseout="changeImage4(false)">
+                <img src="/images/iconsMedalBlack.png" onclick="scoreReq()" class="sideBtn4" id="buttonImage4">
             </button>
         </div>
     </div>
@@ -72,7 +76,7 @@
     </div>
 </div>
 </div>
-
+<!-- 회원추가 모달 -->
 <div class="modal" id="modal">
     <div class="modal_body">
             <button type="button" class="closeModal" >X</button>
@@ -142,6 +146,10 @@
         location.href = "/bowling/games";
     };
 
+    const scoreReq = () => {
+        location.href = "/bowling/rank";
+    };
+
     const addUserReq =()=> {
         location.href = "/bowling/add";
     }
@@ -178,9 +186,18 @@
     function changeImage3(isHovering) {
         var img = document.getElementById('buttonImage3');
         if (isHovering) {
-            img.src = '/images/iconsBowlingOrange.png';
+            img.src = '/images/iconsBowlingGreen.png';
         } else {
             img.src = '/images/iconsBowlingBlack.png';
+        }
+    }
+
+    function changeImage4(isHovering) {
+        var img = document.getElementById('buttonImage4');
+        if (isHovering) {
+            img.src = '/images/iconsMedalYellow.png';
+        } else {
+            img.src = '/images/iconsMedalBlack.png';
         }
     }
 </script>

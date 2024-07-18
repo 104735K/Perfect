@@ -58,7 +58,7 @@
         </button>
     </div>
 </div>
-
+<!-- 게임 점수 저장 -->
 <div class="modal" id="modal">
     <div class="modal_body">
         <button type="button" class="closeModal" >X</button>
@@ -78,7 +78,7 @@
                     <td class="table0-4">G4</td>
                     <td class="table0-4">HANDICAP</td>
                 </tr>
-                <tr th:each="user, iterStat : ${users}">
+                <tr th:each="user, iterStat : ${users}" >
                     <td>
                         <input type="hidden"  name="userId" th:value="${user.userId}" class="userId-input">
                         <span th:text="${user.userId}"></span>
@@ -99,7 +99,7 @@
         </form>
     </div>
 </div>
-
+<!-- 게임 점수 수정 -->
 <div class="modal" id="updateModal">
     <div class="modal_body">
         <button type="button" class="closeModal" onclick="closeModal()" >X</button>
@@ -141,7 +141,7 @@
         </form>
     </div>
 </div>
-
+<!-- 게임 날짜 수정 -->
 <div class="modal" id="gameModal">
     <div class="gameModal_body">
         <button type="button" class="closeModal" onclick="closeGameModal()">X</button>
@@ -160,15 +160,12 @@
         </div>
     </div>
 </div>
-
-
 </body>
 </html>
 <script>
     const modal = document.querySelector('.modal');
     const btnOpenModal=document.querySelector('.saveModal');
     const closeModalBtn = document.querySelector('.closeModal');
-
 
     btnOpenModal.addEventListener("click", ()=>{
         modal.style.display="flex";
@@ -225,8 +222,8 @@
     }
 
     function excelDownloadScores() {
-    var gameId = document.getElementById("gameId").value;
-    location.href = "/bowling/downloadScoresByGameId/" + gameId;
-}
+        var gameId = document.getElementById("gameId").value;
+        location.href = "/bowling/downloadScoresByGameId/" + gameId;
+    }
 
 </script>

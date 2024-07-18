@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>rank</title>
+    <link rel="stylesheet" type="text/css" href="/css/rank.css">
+</head>
+<body>
+</br>
+<div class="ptop">
+    <div class="top">
+        <div class="header">
+            <h2>순위</h2>
+        </div>
+        <hr>
+    </div>
+    <!-- 사이드 버튼 -->
+    <div class="left">
+        <div class="side">
+            <div class="sideB">
+                <button type="button" class="btn1" onmouseover="changeImage(true)" onmouseout="changeImage(false)">
+                    <img src="/images/iconsHomeBlack.png" onclick="homeReq()" class="sideBtn1" id="buttonImage">
+                </button></br>
+                <button type="button" class="btn1" onmouseover="changeImage2(true)" onmouseout="changeImage2(false)">
+                    <img src="/images/iconsUsersBlack.png" onclick="userReq()" class="sideBtn2" id="buttonImage2">
+                </button></br>
+                <button type="button" class="btn1" onmouseover="changeImage3(true)" onmouseout="changeImage3(false)">
+                    <img src="/images/iconsBowlingBlack.png" onclick="gameReq()" class="sideBtn3" id="buttonImage3">
+                </button>
+                <button type="button" class="btn1">
+                    <img src="/images/iconsMedalYellow.png" onclick="scoreReq()" class="sideBtn4">
+                </button>
+            </div>
+        </div>
+    </div>
+<div class="right">
+    <div class="rankBtns">
+        <button class="rankBtn">전채점수순위</button>
+        <button class="rankBtn">개인최고점수</button>
+        <button class="rankBtn">개인순위</button>
+    </div>
+    <div class="tablePadding">
+    <table>
+        <tr>
+            <td class="table1">순위</td>
+            <td class="table2">이름</td>
+            <td class="table1">게임번호</td>
+            <td class="table3">G1</td>
+            <td class="table3">G2</td>
+            <td class="table3">G3</td>
+            <td class="table3">G4</td>
+            <td class="table3">HANDICAP</td>
+            <td class="table3">TOTAL SCORE</td>
+            <td class="table3">AVG SCORE</td>
+        </tr>
+        <tr th:each="rank ,iterStat : ${rankList}" th:class="${iterStat.index > 9} ? 'rowRank' : ''">
+            <td th:text="${iterStat.index + 1}"  th:class="${iterStat.index < 10} ? 'topRank rank' : 'rank'"></td>
+            <td th:text="${rank.userName}"></td>
+            <td th:text="${rank.gameId}"></td>
+            <td th:text="${rank.scoreG1}" th:class="${rank.scoreG1 ge 200} ? 'scoreHigh' : ''"></td>
+            <td th:text="${rank.scoreG2}" th:class="${rank.scoreG1 ge 200} ? 'scoreHigh' : ''"></td>
+            <td th:text="${rank.scoreG3}" th:class="${rank.scoreG1 ge 200} ? 'scoreHigh' : ''"></td>
+            <td th:text="${rank.scoreG4}" th:class="${rank.scoreG1 ge 200} ? 'scoreHigh' : ''"></td>
+            <td th:text="${rank.handicap}"></td>
+            <td th:text="${rank.totalScore}"></td>
+            <td th:text="${rank.avgScore}"></td>
+        </tr>
+    </table>
+    </div>
+</div>
+    <div class="bottom">
+    </div>
+</body>
+<script>
+    const homeReq = () => {
+        location.href = "/bowling/home";
+    };
+
+    const userReq = () => {
+        location.href = "/bowling/users";
+    };
+
+    const gameReq = () => {
+        location.href = "/bowling/games";
+    };
+
+    function changeImage(isHovering) {
+        var img = document.getElementById('buttonImage');
+        if (isHovering) {
+            img.src = '/images/iconsHomeRed.png';
+        } else {
+            img.src = '/images/iconsHomeBlack.png';
+        }
+    }
+
+    function changeImage2(isHovering) {
+        var img = document.getElementById('buttonImage2');
+        if (isHovering) {
+            img.src = '/images/iconsUsersBlue.png';
+        } else {
+            img.src = '/images/iconsUsersBlack.png';
+        }
+    }
+
+    function changeImage3(isHovering) {
+        var img = document.getElementById('buttonImage3');
+        if (isHovering) {
+            img.src = '/images/iconsBowlingGreen.png';
+        } else {
+            img.src = '/images/iconsBowlingBlack.png';
+        }
+    }
+
+</script>
+</html>

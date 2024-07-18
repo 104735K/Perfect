@@ -14,9 +14,11 @@ th, td {border: 1px solid grey; padding: 10px; text-align:center;}
 
 .btn1{width:100px; height:25px; background-color:transparent; color: transparent; border: 1px solid transparent; border-radius:5px; text-align:center; margin:10px auto;}
 
-.sideBtn1{width:16px; height:16px;}
-.sideBtn2{width:21px; height:21px;}
-.sideBtn3{width:19px; height:19px;}
+.sideBtn1{width:16px; height:16px; margin:27px 0 0 0;}
+.sideBtn2{width:21px; height:21px; margin:27px 0 0 0;}
+.sideBtn3{width:19px; height:19px; margin:27px 0 0 0;}
+.sideBtn4{width:21px; height:19px; margin:27px 0 0 0;}
+
 
 .excelDownloadBtn{width:34px; height:25px; cursor:pointer; background-color:transparent; border: 1px solid grey; border-radius:5px;}
 .excelDownloadBtn:hover{border: 1px solid green;background-color:transparent; border-radius:5px;}
@@ -59,8 +61,8 @@ p{margin:5px 0 0 0;}
 
 .padding3 {display: flex; justify-content: space-around; padding : 20px; width:400px; height:70px;  box-sizing: border-box; align-items:center; border: none; border-radius:20px; text-align:center; margin:15px 0 0 0;}
 
-.side{display: flex; justify-content: space-around;flex-direction: column; padding :10px; width:200px; height:300px;  box-sizing: border-box; align-items:center; border: 1px solid #cc1010; border-radius:10px; text-align:center; margin: 45px 0 0 120px;}
-.sideB{margin:15px auto;}
+.side{display: flex; justify-content: space-around;flex-direction: column; padding :10px; width:100%; height:300px;  box-sizing: border-box; align-items:center; border: none; border-radius:10px; text-align:center; margin: 45px 0 0 108.9px;}
+.sideB{width:100px; height:280px; border-bottom: 1.3px solid #cc1010;}
 
 .ptop{width:100%, height:100%;}
 .top{width:100%; height:100px; background:transparent;}

@@ -11,13 +11,17 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.Banner;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/bowling")
@@ -160,6 +164,33 @@ public class bowlingController {
     public String gameUpdate(@ModelAttribute GameDto gameDto, @RequestParam Long gameId) {
         GameDto gameDto1 = gameService.updateGame(gameDto);
         return "redirect:/bowling/games/" + gameId;
+    }
+
+    @GetMapping("/games/monthly")
+    public String getGames(@RequestParam(value = "month", required = false) Integer month, Model model) {
+        List<GameDto> allGames = gameService.findGames();
+        List<GameDto> monthGames;
+
+        if (month != null) {
+            monthGames = allGames.stream()
+                    .filter(game -> {
+                        LocalDate date = game.getGameDate().toInstant()
+                                .atZone(ZoneId.systemDefault()).toLocalDate();
+                        return date.getMonthValue() == month;
+                    })
+                    .collect(Collectors.toList());
+        } else {
+            monthGames = allGames;
+        }
+        model.addAttribute("gameList", monthGames);
+        return "games";
+    }
+    @GetMapping("/rank")
+    public String ranking(Model model) {
+        List<ScoreDto> rankList = scoreService.findScore();
+        rankList.sort(Comparator.comparing(ScoreDto::getAvgScore).reversed());
+        model.addAttribute("rankList", rankList);
+        return "rank";
     }
 }
 
