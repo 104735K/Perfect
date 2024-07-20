@@ -52,13 +52,19 @@ button:hover {background-color:transparent; color:#0444d9; border: 1px solid gre
 .button{width:100px; height:25px; background-color:green; color:white; border: 1px solid green; font-size:19px; border-radius:5px; text-align:center; transition: color 0.3s; margin-right:5px;}
 .button:hover {background-color:transparent; color:green; border: 1px solid green; font-size:19px; border-radius:5px;}
 
-.deleteScore {width:23px; height:23px; background-color:transparent; border: 1px solid red; color:red; font-size:15px; text-align:center; transition: color 0.3s; border-radius:40px;}
+.deleteScore{width:23px; height:23px; background-color:transparent; border: 1px solid red; color:red; font-size:15px; text-align:center; transition: color 0.3s; border-radius:40px;}
 .deleteScore:hover {background-color:red; color:white; border: 1px solid red; font-size:15px; border-radius:40px;}
 
 .excelDownloadScores{width:34px; height:25px; cursor:pointer; background-color:transparent; border: 1px solid grey; border-radius:5px;}
 .excelDownloadScores:hover{border: 1px solid green;background-color:transparent; border-radius:5px;}
 img{width:22px; height:22px;}
 
-.scoreHigh {color: red; font-weight: bold;}
+.scoreHigh{color: red; font-weight: bold;}
 
 .btnPadding{display: flex; justify-content: space-around; padding : 20px; width:100%; height:70px;  box-sizing: border-box; align-items:center; border: none; border-radius:20px; text-align:center;}
+
+.deleteBtnPadding{width:34px; height:25px; cursor:pointer; background-color:transparent;}
+.deleteBtnPadding:hover{border: 1px solid red;background-color:transparent; border-radius:5px;}
+.deleteBtn{width:17px; height:17px; margin-top:2px;}
+.updateGameBtn{width:17px; height:17px; margin-top:2px;}
+.updateScoreBtn{width:20px; height:20px;}

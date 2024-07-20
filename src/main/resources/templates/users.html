@@ -62,11 +62,14 @@
 </br>
 </div>
 </div>
+<!-- 하단 버튼 -->
 <div class="bottom">
     <div class="btnPadding">
         <div class="center">
-            <button type="button" class="addModal" >+</button>
-            <button type="button" onclick="updateUserReq()" class="updateBtn">⬆</button>
+            <button type="button" class="addModal">+</button>
+            <button type="button" class="updateBtn" onmouseover="changeImage5(true)" onmouseout="changeImage5(false)" >
+                <img src="/images/iconsEditWhite.png" onclick="updateUserReq()" id="buttonImage5" class="updateUserBtn">
+            </button>
             <div>
                 <button type="button" class="excelDownloadBtn">
                     <img src="/images/iconsExcelGreen.png" onclick="excelDownloadUser()">
@@ -198,6 +201,15 @@
             img.src = '/images/iconsMedalYellow.png';
         } else {
             img.src = '/images/iconsMedalBlack.png';
+        }
+    }
+
+    function changeImage5(isHovering) {
+        var img = document.getElementById('buttonImage5');
+        if (isHovering) {
+            img.src = '/images/iconsEditOrange.png';
+        } else {
+            img.src = '/images/iconsEditWhite.png';
         }
     }
 </script>

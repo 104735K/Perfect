@@ -47,14 +47,22 @@
         </tr>
     </table>
 </div>
+<!-- 하단 버튼 -->
 <div class="btnPadding">
     <div class="padding3">
         <button type="button" onclick="cancel()" class="cancelBtn">⏎</button>
         <button class="saveModal">＋</button>
-        <button onclick="openModal(this)" class="updateScore">⬆</button>
-        <button onclick="GameModal()" class="updateGame">📅⬆</button>
+        <button onclick="openModal(this)" class="updateScore" onmouseover="changeImage3(true)" onmouseout="changeImage3(false)">
+            <img src="/images/iconsEditOrange.png" onclick="GameModal()" class="updateScoreBtn" id="buttonImage3">
+        </button>
+        <button class="updateGame" onmouseover="changeImage2(true)" onmouseout="changeImage2(false)" >
+            <img src="/images/iconsCalendarBlue.png" onclick="GameModal()" class="updateGameBtn" id="buttonImage2">
+        </button>
         <button type="button" class="excelDownloadScores">
             <img src="/images/iconsExcelGreen.png" onclick="excelDownloadScores()">
+        </button>
+        <button type="button" class="deleteBtnPadding" onmouseover="changeImage(true)" onmouseout="changeImage(false)">
+            <img src="/images/iconsDeleteBlack.png" onclick="deleteGame()" class="deleteBtn" id="buttonImage1">
         </button>
     </div>
 </div>
@@ -88,10 +96,10 @@
                         <input type="radio"  th:name="users[__${iterStat.index}__].attendance" value="참여" checked onclick="toggleInputs(this)"> 참여
                         <input type="radio"  th:name="users[__${iterStat.index}__].attendance" value="불참" onclick="toggleInputs(this)"> 불참
                     </td>
-                    <td><input type="number" min="0" max="300" name="scoreG1" class="score-input" onchange="calculateTotalScore(this)"></td>
-                    <td><input type="number" min="0" max="300" name="scoreG2" class="score-input" onchange="calculateTotalScore(this)"></td>
-                    <td><input type="number" min="0" max="300" name="scoreG3" class="score-input" onchange="calculateTotalScore(this)"></td>
-                    <td><input type="number" min="0" max="300" name="scoreG4" class="score-input" onchange="calculateTotalScore(this)"></td>
+                    <td><input type="number" min="0" max="300" name="scoreG1" class="score-input" required></td>
+                    <td><input type="number" min="0" max="300" name="scoreG2" class="score-input" required></td>
+                    <td><input type="number" min="0" max="300" name="scoreG3" class="score-input" required></td>
+                    <td><input type="number" min="0" max="300" name="scoreG4" class="score-input" required></td>
                     <td><input type="number" name="handicap" class="score-input" value="0"></td>
                 </tr>
             </table>
@@ -129,10 +137,10 @@
                         <input type="hidden" name="userName" th:value="${updateScores.userName}">
                         <span th:text="${updateScores.userName}"></span>
                     </td>
-                    <td> <input type="number" min="0" max="300" name="scoreG1" th:value="${updateScores.scoreG1}" class="textbox"></td>
-                    <td> <input type="number" min="0" max="300" name="scoreG2" th:value="${updateScores.scoreG2}" class="textbox"></td>
-                    <td> <input type="number" min="0" max="300" name="scoreG3" th:value="${updateScores.scoreG3}" class="textbox"></td>
-                    <td> <input type="number" min="0" max="300" name="scoreG4" th:value="${updateScores.scoreG4}" class="textbox"></td>
+                    <td> <input type="number" min="0" max="300" name="scoreG1" th:value="${updateScores.scoreG1}" class="textbox" required></td>
+                    <td> <input type="number" min="0" max="300" name="scoreG2" th:value="${updateScores.scoreG2}" class="textbox" required></td>
+                    <td> <input type="number" min="0" max="300" name="scoreG3" th:value="${updateScores.scoreG3}" class="textbox" required></td>
+                    <td> <input type="number" min="0" max="300" name="scoreG4" th:value="${updateScores.scoreG4}" class="textbox" required></td>
                     <td> <input type="number" name="handicap" th:value="${updateScores.handicap}" class="textbox"></td>
                     <td> <button type="button" th:onclick="deleteScore([[${updateScores.scoreId}]])"  class="deleteScore">−</button></td>
                 </tr>
@@ -224,6 +232,40 @@
     function excelDownloadScores() {
         var gameId = document.getElementById("gameId").value;
         location.href = "/bowling/downloadScoresByGameId/" + gameId;
+    }
+
+    const deleteGame = () => {
+        var gameId = document.getElementById("gameId").value;
+        if(confirm("게임을 삭제하시겠습니까?")) {
+            location.href = "/bowling/game/delete/" + gameId
+        }
+    }
+
+    function changeImage(isHovering) {
+        var img = document.getElementById('buttonImage1');
+        if (isHovering) {
+            img.src = '/images/iconsDeleteRed.png';
+        } else {
+            img.src = '/images/iconsDeleteBlack.png';
+        }
+    }
+
+    function changeImage2(isHovering) {
+        var img = document.getElementById('buttonImage2');
+        if (isHovering) {
+            img.src = '/images/iconsCalendarWhite.png';
+        } else {
+            img.src = '/images/iconsCalendarBlue.png';
+        }
+    }
+
+    function changeImage3(isHovering) {
+        var img = document.getElementById('buttonImage3');
+        if (isHovering) {
+            img.src = '/images/iconsEditWhite.png';
+        } else {
+            img.src = '/images/iconsEditOrange.png';
+        }
     }
 
 </script>

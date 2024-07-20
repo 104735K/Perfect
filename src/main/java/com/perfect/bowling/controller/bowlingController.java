@@ -3,6 +3,7 @@ package com.perfect.bowling.controller;
 import com.perfect.bowling.dto.GameDto;
 import com.perfect.bowling.dto.ScoreDto;
 import com.perfect.bowling.dto.UserDto;
+import com.perfect.bowling.entity.GameEntity;
 import com.perfect.bowling.service.GameService;
 import com.perfect.bowling.service.ScoreService;
 import com.perfect.bowling.service.UserService;
@@ -164,6 +165,12 @@ public class bowlingController {
     public String gameUpdate(@ModelAttribute GameDto gameDto, @RequestParam Long gameId) {
         GameDto gameDto1 = gameService.updateGame(gameDto);
         return "redirect:/bowling/games/" + gameId;
+    }
+
+    @GetMapping("game/delete/{gameId}")
+    public String deleteGame(@PathVariable Long gameId) {
+        gameService.deleteGame(gameId);
+        return "games";
     }
 
     @GetMapping("/games/monthly")
