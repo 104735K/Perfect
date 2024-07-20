@@ -56,7 +56,9 @@
         <tr th:each="rank ,iterStat : ${rankList}" th:class="${iterStat.index > 9} ? 'rowRank' : ''">
             <td th:text="${iterStat.index + 1}"  th:class="${iterStat.index < 10} ? 'topRank rank' : 'rank'"></td>
             <td th:text="${rank.userName}"></td>
-            <td th:text="${rank.gameId}"></td>
+            <td>
+                <a th:href="@{|/bowling/games/${rank.gameId}|}" th:text="${rank.gameId}"></a>
+            </td>
             <td th:text="${rank.scoreG1}" th:class="${rank.scoreG1 ge 200} ? 'scoreHigh' : ''"></td>
             <td th:text="${rank.scoreG2}" th:class="${rank.scoreG1 ge 200} ? 'scoreHigh' : ''"></td>
             <td th:text="${rank.scoreG3}" th:class="${rank.scoreG1 ge 200} ? 'scoreHigh' : ''"></td>

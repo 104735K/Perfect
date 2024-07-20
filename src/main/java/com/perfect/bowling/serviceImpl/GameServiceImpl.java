@@ -4,8 +4,8 @@ import com.perfect.bowling.dto.GameDto;
 import com.perfect.bowling.entity.GameEntity;
 import com.perfect.bowling.repository.GameRepository;
 import com.perfect.bowling.service.GameService;
+import com.perfect.bowling.service.ScoreService;
 import lombok.RequiredArgsConstructor;
-import org.aspectj.weaver.patterns.IScope;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -14,6 +14,7 @@ import java.util.*;
 @RequiredArgsConstructor
 public class GameServiceImpl implements GameService {
     private final GameRepository gameRepository;
+    private final ScoreService scoreService;
     @Override
     public void saveGame(GameDto gameDto) {
         GameEntity gameEntity = GameEntity.saveGameEntity(gameDto);
@@ -49,6 +50,7 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
-    public void deleteGame(GameDto gameDto) {
+    public void deleteGame(Long gameId) {
+        gameRepository.deleteById(gameId);
     }
 }
